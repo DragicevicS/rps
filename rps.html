@@ -4,65 +4,26 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Rock Paper Scissors</title>
+   <link rel="stylesheet" href="style.css">
+   <script src="play.js" defer></script>
 </head>
 <body>
-   <script>
-
-      const r = "rock";
-      const p = "paper";
-      const s = "scissors"
-      
-      function playRound() {
-         function getCompChoice() {
-         let choice = Math.random();
-         if (choice >= 0 && choice < 0.33) return r;
-         else if (choice >= 0.33 && choice < 0.66) return p;
-         else return s;
-         };
-         const compChoice = getCompChoice();
-
-         const player = prompt("Choose: rock, paper or scissors?").toLowerCase();
-         console.log(player);
-         console.log(compChoice);
-         if ((player == r && compChoice == r) || (player == p && compChoice == p) || (player == s && compChoice == s)) {
-            alert("Draw! The computer also chose " + player + "!");
-            return 0;
-         } else if ((player == r && compChoice == s) || (player == p && compChoice == r) || (player == s && compChoice == p)) {
-            alert("Computer chose: " + compChoice + ". Player wins this round!");
-            return 1;
-         } else if ((player == r && compChoice == p) || (player == p && compChoice == s) || (player == s && compChoice == r)) {
-            alert("Computer chose: " + compChoice + ". Computer wins this round!");
-            return -1;
-         } else location.reload();
-      };
-
-      function game() {
-         let result = 0;
-         for (let i=0; i<=4; i++) {
-            result = result + playRound();
-            console.log(result);
-         };
-         if (result == 0) {
-            alert("Final result: DRAW!");
-            location.reload();
-         } else if (result > 0) {
-            alert("Final result: PLAYER WINS!");
-            location.reload();
-         } else if (result < 0) {
-            alert("Final result: COMPUTER WINS!");
-            location.reload();
-         } else location.reload();
-      };
-
-      
-      game();
-
-
-
-
-
-
-   </script>
+   <div class="container">
+      <h1>Choose: Rock, Paper or Scissors?</h1>
+      <div class="game">
+         <div class="btns">
+         <div class="choice" id="rock"><img src="images/rock.jpg" title="Rock" alt="Image of a rock hand gesture"></div>
+         <div class="choice" id="paper"><img src="images/paper.jpg" title="Paper" alt="Image of a paper hand gesture"></div>
+         <div class="choice" id="scissors"><img src="images/scissors.jpg" title="Scissors" alt="Image of a scissors hand gesture"></div>
+         </div>
+         <div class="round-results">
+            <p></p>
+            <p></p>
+            <p></p>
+         </div>
+         <button class="again">Play again</button>
+      </div>
+   </div>
 </body>
 </html>
