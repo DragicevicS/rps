@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -16,12 +18,13 @@ body {
 }
 
 .container {
+  display: flex;
   background-color: #85a3e0;
   text-align: center;
   border: 2px solid aliceblue;
   border-radius: 4px;
-  padding: 1em 1em;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 0;
+  box-shadow: 0 0 15px black;
 }
 
 .game {
@@ -40,6 +43,7 @@ body {
 .btns img {
   border: 2px solid #1f3d7a;
   border-radius: 10px;
+  box-shadow: 0 0 5px black;
 }
 
 .btns img:hover {
@@ -68,4 +72,15 @@ body {
   border-radius: 5px;
   margin: 0 0 1em 0;
   font-size: 20px;
+  box-shadow: 0 0 5px black;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: solid 2px aliceblue;
+  margin: -2px 0;
+  padding: 0.5em 1em;
+  width: 100%;
 }

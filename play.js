@@ -1,3 +1,5 @@
+function game() {
+
 const choice = document.querySelectorAll('.choice');
 
 choice.forEach((choice) => {
@@ -37,27 +39,22 @@ choice.forEach((choice) => {
 document.querySelector('.again').addEventListener('click', () => {
   location.reload();
 });
-
-
 /*
-function game() {
-    let result = 0;
-    for (let i=0; i<=4; i++) {
-      result = result + playRound();
-      console.log(result);
-    };
-    if (result == 0) {
-      alert("Final result: DRAW!");
-      location.reload();
-    } else if (result > 0) {
-      alert("Final result: PLAYER WINS!");
-      location.reload();
-    } else if (result < 0) {
-      alert("Final result: COMPUTER WINS!");
-      location.reload();
-    } else location.reload();
+let result = 0;
+for (let i=0; i<=4; i++) {
+  result = result + playRound();
+  console.log(result);
 };
-
-
-game();
+if (result == 0) {
+  alert("Final result: DRAW!");
+  location.reload();
+} else if (result > 0) {
+  alert("Final result: PLAYER WINS!");
+  location.reload();
+} else if (result < 0) {
+  alert("Final result: COMPUTER WINS!");
+  location.reload();
+} else location.reload();
 */
+};
+game();
