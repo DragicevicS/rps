@@ -1,60 +1,82 @@
-function game() {
+const r = "rock";
+const p = "paper";
+const s = "scissors"
+const numOfRounds = prompt('How many round would you like to play? (between 1 to 15)');
 
-const choice = document.querySelectorAll('.choice');
+function getNoR(){
+  if (numOfRounds > 0 && numOfRounds < 16) return;
+  else location.reload();
+};
 
-choice.forEach((choice) => {
-  choice.addEventListener('click', () =>{
-    choice.style.borderColor = 'red';
-    const r = "rock";
-    const p = "paper";
-    const s = "scissors"
-    let player = choice.getAttribute('id');
-    function getCompChoice() {
-    let choice = Math.random();
-    if (choice >= 0 && choice < 0.33) return r;
-    else if (choice >= 0.33 && choice < 0.66) return p;
-    else return s;
-    };
-    let compChoice = getCompChoice();
-    
-    console.log(player);
-    console.log(compChoice);
-    let roundResults = document.querySelector('.round-results');
-    roundResults.firstChild.textContent = "Player chose: " + player;
-    roundResults.childNodes[1].textContent = "Computer chose: " + compChoice;
+getNoR();
 
-    if ((player == r && compChoice == r) || (player == p && compChoice == p) || (player == s && compChoice == s)) {
-      roundResults.lastChild.textContent = "It's a draw!"
-      return 0;
-    } else if ((player == r && compChoice == s) || (player == p && compChoice == r) || (player == s && compChoice == p)) {
-      roundResults.lastChild.textContent = "Player wins this round!" 
-      return 1;
-    } else if ((player == r && compChoice == p) || (player == p && compChoice == s) || (player == s && compChoice == r)) {
-      roundResults.lastChild.textContent = "Computer wins this round!"
-      return -1;
-    } else return;
+let round = 0;
+let playerScore = 0;
+let compScore = 0;
+
+function getCompChoice() {
+  let randomChoice = Math.random();
+  if (randomChoice >= 0 && randomChoice < 0.33) return r;
+  else if (randomChoice >= 0.33 && randomChoice < 0.66) return p;
+  else return s;
+};
+
+function addGlobalEventListener(type, selector, callback) {
+  document.addEventListener(type, e => {
+    if (e.target.matches(selector)) callback(e);
   });
+};
+
+function playRound(playerChoice, compChoice) {
+  let roundResults = document.querySelector('.round-results');
+  roundResults.firstChild.textContent = "Player chose: " + playerChoice;
+  roundResults.childNodes[1].textContent = "Computer chose: " + compChoice;
+
+  if (round+1 <= numOfRounds) {
+    if ((playerChoice == r && compChoice == r) || (playerChoice == p && compChoice == p) || (playerChoice == s && compChoice == s)) {
+      roundResults.lastChild.textContent = "It's a draw!"
+    } else if ((playerChoice == r && compChoice == s) || (playerChoice == p && compChoice == r) || (playerChoice == s && compChoice == p)) {
+      roundResults.lastChild.textContent = "Player wins this round!" 
+      playerScore++;
+    } else {
+      roundResults.lastChild.textContent = "Computer wins this round!"
+      compScore++;
+    };
+    round++;
+  };
+  
+};
+
+const ul = document.querySelectorAll('.results');
+const results = document.querySelector('.results');
+ul.forEach(ul => {
+  for (let i=1; i <= numOfRounds; i++) {
+    const li = document.createElement('li');
+    li.classList.add(i);
+    ul.appendChild(li);
+  };
 });
 
-document.querySelector('.again').addEventListener('click', () => {
-  location.reload();
+const again = document.querySelector('.again');
+again.addEventListener('click', () => {location.reload()});
+
+function alertScore() {
+  if (playerScore == compScore && round == numOfRounds) {
+    setTimeout(() => {alert("DRAW!");}, 50);
+  } else if (playerScore > compScore && round == numOfRounds) {
+    setTimeout(() => {alert("PLAYER WON THE GAME!");}, 50);
+  } else if (playerScore < compScore & round == numOfRounds) {
+    setTimeout(() => {alert("COMPUTER WON THE GAME!");}, 50);
+  };
+};
+
+addGlobalEventListener('click', 'img', e => {
+  let comp = getCompChoice();
+  let player = e.target.getAttribute('id');
+  playRound(player, comp);
+  
+  results.childNodes[round+4].textContent = round + ". Player " + playerScore + " : " + compScore + " Computer";
+  alertScore();
 });
-/*
-let result = 0;
-for (let i=0; i<=4; i++) {
-  result = result + playRound();
-  console.log(result);
-};
-if (result == 0) {
-  alert("Final result: DRAW!");
-  location.reload();
-} else if (result > 0) {
-  alert("Final result: PLAYER WINS!");
-  location.reload();
-} else if (result < 0) {
-  alert("Final result: COMPUTER WINS!");
-  location.reload();
-} else location.reload();
-*/
-};
-game();
+
+
